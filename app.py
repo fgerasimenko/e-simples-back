@@ -1,5 +1,7 @@
 import os
 
+from api import produto_v1
+
 from config import iniciar_logger, iniciar_variaveis_ambiente, \
     definir_ambiente, configurar_healthcheck, iniciar_swagger, init_cors, \
     log_requests
@@ -27,6 +29,9 @@ def criar_app(usar_var_env=True, testing=False):
 
     if testing:
         app.config["TESTING"] = True
+    
+    app.logger.info('Registrando blueprint: produto_v1')
+    app.register_blueprint(produto_v1)
     
     return app
 
